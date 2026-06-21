@@ -1,0 +1,35 @@
+=== O QUE VOCÊ PODE FAZER NO SITE VALENPRINT ===
+
+1. NAVEGAR PELAS SEÇÕES PRINCIPAIS
+- Você pode clicar nos links do topo para ir diretamente para:
+  • Home (início do site)
+  • Produtos (ver todos os itens disponíveis)
+  • Sobre (conhecer mais sobre a ValenPrint)
+  • Contato (falar com a equipe)
+  • Admin (área administrativa)
+- No celular, tem um menu hambúrguer que abre as opções
+
+2. ENTRAR EM CONTATO RÁPIDO PELO WHATSAPP
+- Tem um botão fixado no canto inferior direito da tela
+- Clica nele e você é direcionado diretamente para o WhatsApp da ValenPrint
+- Também tem botões "Falar no WhatsApp" na seção inicial e "WhatsApp" na seção de contato
+
+3. VER OS PRODUTOS DISPONÍVEIS
+- A seção "Produtos em Destaque" mostra 6 itens principais
+- Você pode ver as fotos reais de cada produto, nome, descrição, preço e quantidade em estoque
+- Se um produto estiver acabando, aparece um aviso "Últimas unidades!"
+
+4. SOLICITAR UM ORÇAMENTO
+- Na seção final do site, tem um botão "Solicitar Orçamento" para pedir um orçamento sem compromisso
+
+5. CONHECER MAIS SOBRE A EMPRESA
+- A seção "Sobre" mostra os diferenciais da ValenPrint, como qualidade, atendimento personalizado, entregas para todo o Brasil, etc.
+
+6. ACESSAR LINKS RÁPIDOS NO RODAPÉ
+- No final do site, tem links para voltar rapidamente para qualquer seção, além de informações de contato e redes sociais
+
+---
+Observações:
+- Este é um site de prévia (preview)
+- Todas as imagens dos produtos são reais e condizentes com os itens
+- O menu é responsivo para funcionar perfeitamente em celulares Android e iOS

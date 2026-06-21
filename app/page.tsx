@@ -1,14 +1,15 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { useState } from 'react'
 
 const products = [
   {
     id: '1',
     name: 'Caneca Cerâmica Branca',
     description: 'Caneca de cerâmica premium com sua logo ou arte personalizada',
-    imageUrl: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
     price: 29.9,
     stock: 150,
     category: 'Canecas'
@@ -17,7 +18,7 @@ const products = [
     id: '2',
     name: 'Squeeze Alumínio 500ml',
     description: 'Squeeze ecológico e resistente, ideal para esportes e eventos',
-    imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=800&q=80',
     price: 34.9,
     stock: 80,
     category: 'Squeezes'
@@ -26,7 +27,7 @@ const products = [
     id: '3',
     name: 'Copo de Vidro Fosco',
     description: 'Copo de vidro fosco elegante para eventos especiais',
-    imageUrl: 'https://images.unsplash.com/photo-1574158622682-e40e69881006?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80',
     price: 19.9,
     stock: 200,
     category: 'Copos'
@@ -35,7 +36,7 @@ const products = [
     id: '4',
     name: 'Garrafa Térmica Inox',
     description: 'Garrafa térmica de alta qualidade, mantém a temperatura por horas',
-    imageUrl: 'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=800&q=80',
     price: 49.9,
     stock: 45,
     category: 'Garrafas Térmicas'
@@ -44,7 +45,7 @@ const products = [
     id: '5',
     name: 'Kit Corporativo Premium',
     description: 'Kit completo com caneca, caderno e caneta personalizados',
-    imageUrl: 'https://images.unsplash.com/photo-1588580023730-18ce55594880?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1561043256-a7d672d8c7a6?w=800&q=80',
     price: 99.9,
     stock: 30,
     category: 'Kits Corporativos'
@@ -53,7 +54,7 @@ const products = [
     id: '6',
     name: 'Brindes para Eventos',
     description: 'Pacote de brindes personalizados para feiras e eventos',
-    imageUrl: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1531397960567-22767752a196?w=800&q=80',
     price: 149.9,
     stock: 25,
     category: 'Brindes'
@@ -86,6 +87,15 @@ const WhatsAppButton = () => (
 )
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const navLinks = [
+    { href: '#home', label: 'Home' },
+    { href: '#products', label: 'Produtos' },
+    { href: '#about', label: 'Sobre' },
+    { href: '#contact', label: 'Contato' }
+  ]
+
   return (
     <div className="min-h-screen bg-white text-black">
       <WhatsAppButton />
@@ -98,16 +108,84 @@ export default function Home() {
               Valen<span className="text-pink">Print</span>
             </div>
             
+            {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8">
-              <a href="#home" className="text-gray-600 hover:text-pink transition-colors">Home</a>
-              <a href="#products" className="text-gray-600 hover:text-pink transition-colors">Produtos</a>
-              <a href="#about" className="text-gray-600 hover:text-pink transition-colors">Sobre</a>
-              <a href="#contact" className="text-gray-600 hover:text-pink transition-colors">Contato</a>
+              {navLinks.map(link => (
+                <a 
+                  key={link.href} 
+                  href={link.href} 
+                  className="text-gray-600 hover:text-pink transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
               <Link href="/admin" className="text-pink hover:underline font-semibold">
                 Admin
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden p-2 text-gray-600 hover:text-pink transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Menu"
+            >
+              <svg 
+                className="w-6 h-6" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                {mobileMenuOpen ? (
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M6 18L18 6M6 6l12 12" 
+                  />
+                ) : (
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M4 6h16M4 12h16M4 18h16" 
+                  />
+                )}
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="md:hidden overflow-hidden"
+              >
+                <div className="pt-4 pb-2 space-y-3 border-t border-gray-100">
+                  {navLinks.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="block py-2 text-gray-600 hover:text-pink transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                  <Link 
+                    href="/admin" 
+                    className="block py-2 text-pink hover:underline font-semibold"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Admin
+                  </Link>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </nav>
 
@@ -143,7 +221,7 @@ export default function Home() {
             >
               <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=800&q=80" 
+                  src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&q=80" 
                   alt="Produtos ValenPrint" 
                   className="object-cover w-full h-full" 
                 />
