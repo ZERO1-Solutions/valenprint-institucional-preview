@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import Link from 'next/link'
+import Link from 'next/link';
 import {
   Sparkles,
   Heart,
@@ -523,27 +523,32 @@ export default function Home() {
                         {product.description}
                       </p>
 
-                      {(('features' in product && product.features) || ('includes' in product && product.includes)) && (
-                        <ul className="mb-4 space-y-1">
-                          {(('features' in product && product.features) || ('includes' in product && product.includes))?.map((item, i) => (
+                      {(() => {
+                        const items: string[] | undefined = 
+                          ('features' in product ? product.features : undefined) ?? 
+                          ('includes' in product ? product.includes : undefined);
+                        return items ? (
+                          <ul className="mb-4 space-y-1">
+                            {items.map((item, i) => (
                             <li key={i} className="text-xs text-gray-500 flex items-center gap-1">
                               <Check size={12} className="text-pink-principal flex-shrink-0" />
                               {item}
                             </li>
                           ))}
-                        </ul>
-                      )}
+                          </ul>
+                        ) : null;
+                      })()}
 
                       <div className="mb-5 pt-4 border-t border-pink-claro/20">
                         <div className="flex items-end gap-2">
                           <span className="text-2xl font-bold text-pink-principal">{product.price}</span>
-                          {product.wholesalePrice && (
+                          {'wholesalePrice' in product && product.wholesalePrice && (
                             <span className="text-sm text-gray-500 line-through mb-1">
-                              {product.price}
+                              {product.wholesalePrice}
                             </span>
                           )}
                         </div>
-                        {product.wholesalePrice && (
+                        {'wholesalePrice' in product && product.wholesalePrice && (
                           <p className="text-xs text-green-600 mt-1 font-medium">
                             Atacado: {product.wholesalePrice} (a partir de 10 unidades)
                           </p>
