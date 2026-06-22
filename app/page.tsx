@@ -523,9 +523,9 @@ export default function Home() {
                         {product.description}
                       </p>
 
-                      {(product.features || product.includes) && (
+                      {(('features' in product && product.features) || ('includes' in product && product.includes)) && (
                         <ul className="mb-4 space-y-1">
-                          {(product.features || product.includes)?.map((item, i) => (
+                          {(('features' in product && product.features) || ('includes' in product && product.includes))?.map((item, i) => (
                             <li key={i} className="text-xs text-gray-500 flex items-center gap-1">
                               <Check size={12} className="text-pink-principal flex-shrink-0" />
                               {item}
