@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link';
 import {
   Sparkles,
@@ -304,12 +304,12 @@ const WhatsAppButton = () => (
 )
 
 const ProductCarousel = ({ products, catIndex }: { products: any[], catIndex: number }) => {
-  const carouselRef = useState<HTMLDivElement>(null)[0];
+  const carouselRef = useRef<HTMLDivElement>(null);
   
   const scroll = (direction: 'left' | 'right') => {
-    if (carouselRef) {
-      const scrollAmount = carouselRef.clientWidth * 0.8;
-      carouselRef.scrollBy({
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.clientWidth * 0.8;
+      carouselRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       });
@@ -615,7 +615,7 @@ export default function Home() {
       <section id="descontos" className="py-24 px-6 bg-pink-support/20">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <span className="font-decorative text-3xl text-pink-principal">Descontos Especiais</span>
+            <span className="font-decorative text-3xl text-pink">Descontos Especiais</span>
             <h2 className="text-4xl md:text-5xl font-bold mt-2">Compre em Atacado</h2>
           </div>
 
@@ -627,9 +627,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-3xl p-8 shadow-card-premium text-center border-2 border-transparent hover:border-pink-principal transition-all duration-300"
+                className="bg-white rounded-3xl p-8 shadow-card-premium text-center border-2 border-transparent hover:border-pink transition-all duration-300"
               >
-                <div className="text-3xl font-serif font-bold text-pink-principal mb-2">{tier.quantity}</div>
+                <div className="text-3xl font-serif font-bold text-pink mb-2">{tier.quantity}</div>
                 <div className="text-xl font-bold text-black-premium">{tier.discount}</div>
               </motion.div>
             ))}
@@ -647,7 +647,7 @@ export default function Home() {
       <section id="como-funciona" className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="font-decorative text-3xl text-pink-principal">É simples assim</span>
+            <span className="font-decorative text-3xl text-pink">É simples assim</span>
             <h2 className="text-4xl md:text-5xl font-bold mt-2">Como Funciona</h2>
           </div>
 
