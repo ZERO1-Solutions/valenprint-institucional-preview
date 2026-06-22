@@ -38,17 +38,21 @@ export default function CategoriesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+      <header className="bg-white shadow-sm border-b border-pink-claro/30 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-4">
-              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink">
+              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink-principal transition-colors">
                 <Home size={20} />
                 Voltar ao site
               </Link>
-              <h1 className="text-2xl font-bold">
-                Valen<span className="text-pink">Print</span> Admin
-              </h1>
+              <Link href="/">
+                <img
+                  src="/ValenPrintHosizontalImg.png"
+                  alt="ValenPrint"
+                  className="h-10 md:h-12 w-auto object-contain"
+                />
+              </Link>
             </div>
           </div>
         </div>
@@ -57,12 +61,12 @@ export default function CategoriesPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">Categorias</h2>
-          <Link href="/admin" className="text-pink hover:underline">
+          <Link href="/admin" className="text-pink-principal hover:text-pink-medio font-semibold transition-colors">
             Voltar ao Dashboard
           </Link>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
-          <form onSubmit={handleSubmit} className="flex gap-4">
+        <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10 mb-6">
+          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <label className="block text-sm font-semibold mb-2">Nome</label>
               <input
@@ -72,7 +76,7 @@ export default function CategoriesPage() {
                   setName(e.target.value)
                   setSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))
                 }}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 placeholder="Nome da categoria"
                 required
               />
@@ -83,7 +87,7 @@ export default function CategoriesPage() {
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 placeholder="slug-da-categoria"
                 required
               />
@@ -91,7 +95,7 @@ export default function CategoriesPage() {
             <div className="flex items-end">
               <button
                 type="submit"
-                className="bg-pink text-white px-6 py-3 rounded-full font-semibold hover:bg-black transition-all flex items-center gap-2"
+                className="bg-pink-principal text-white px-6 py-3 rounded-full font-semibold hover:bg-black-premium transition-all shadow-pink-glow flex items-center gap-2"
               >
                 <Plus size={18} />
                 Adicionar
@@ -103,7 +107,7 @@ export default function CategoriesPage() {
           {categories.map((cat) => (
             <div
               key={cat.id}
-              className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center"
+              className="bg-white p-4 rounded-2xl shadow-card-premium border border-pink-claro/10 flex justify-between items-center"
             >
               <div>
                 <p className="font-semibold">{cat.name}</p>

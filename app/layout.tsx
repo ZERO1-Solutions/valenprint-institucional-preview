@@ -3,6 +3,9 @@ import './globals.css'
 export const metadata = {
   title: 'ValenPrint - Personalização que fortalece sua marca',
   description: 'Canecas, squeezes, copos e acessórios personalizados para varejo, atacado e empresas.',
+  icons: {
+    icon: '/ValenPrintFavicon.png',
+  },
 }
 
 export default function RootLayout({

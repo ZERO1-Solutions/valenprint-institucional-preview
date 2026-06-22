@@ -12,10 +12,10 @@ export default function LoginPage() {
   }, [router])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-pink-50">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-pink-claro/20">
+      <div className="bg-white p-8 rounded-2xl shadow-card-premium border border-pink-claro/20 w-full max-w-md text-center">
         <h1 className="text-3xl font-bold mb-6">
-          Valen<span className="text-pink">Print</span> - Admin
+          Valen<span className="text-pink-principal">Print</span> - Admin
         </h1>
         <p className="text-gray-600 mb-4">Redirecionando para o painel...</p>
       </div>

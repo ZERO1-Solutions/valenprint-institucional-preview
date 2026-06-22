@@ -74,24 +74,28 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+      <header className="bg-white shadow-sm border-b border-pink-claro/30 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-4">
-              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink">
+              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink-principal transition-colors">
                 <Home size={20} />
                 Voltar ao site
               </Link>
-              <h1 className="text-2xl font-bold">
-                Valen<span className="text-pink">Print</span> Admin
-              </h1>
+              <Link href="/">
+                <img
+                  src="/ValenPrintHosizontalImg.png"
+                  alt="ValenPrint"
+                  className="h-10 md:h-12 w-auto object-contain"
+                />
+              </Link>
             </div>
           </div>
         </div>
       </header>
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <nav className="flex gap-2 mb-8 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
+        <nav className="flex flex-wrap gap-2 mb-8 bg-white p-2 rounded-2xl shadow-card-premium border border-pink-claro/20">
           {[
             { id: 'dashboard', label: 'Dashboard', icon: Activity },
             { id: 'products', label: 'Produtos', icon: Package },
@@ -101,9 +105,9 @@ export default function AdminPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all ${activeTab === tab.id
-                ? 'bg-pink text-white'
-                : 'text-gray-600 hover:bg-gray-100'
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${activeTab === tab.id
+                ? 'bg-pink-principal text-white shadow-pink-glow'
+                : 'text-gray-600 hover:bg-pink-claro/20'
               }`}
             >
               <tab.icon size={20} />
@@ -116,54 +120,54 @@ export default function AdminPage() {
           <div>
             <h2 className="text-2xl font-bold mb-8">Resumo Geral</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <div className="text-pink font-semibold mb-2">Total de Vendas</div>
+              <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
+                <div className="text-pink-principal font-semibold mb-2">Total de Vendas</div>
                 <div className="text-3xl font-bold">{salesStats.totalSales}</div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <div className="text-pink font-semibold mb-2">Faturamento Bruto</div>
+              <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
+                <div className="text-pink-principal font-semibold mb-2">Faturamento Bruto</div>
                 <div className="text-3xl font-bold">R${salesStats.grossRevenue.toFixed(2)}</div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <div className="text-pink font-semibold mb-2">Faturamento Líquido</div>
+              <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
+                <div className="text-pink-principal font-semibold mb-2">Faturamento Líquido</div>
                 <div className="text-3xl font-bold">R${salesStats.netRevenue.toFixed(2)}</div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <div className="text-pink font-semibold mb-2">Ticket Médio</div>
+              <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
+                <div className="text-pink-principal font-semibold mb-2">Ticket Médio</div>
                 <div className="text-3xl font-bold">R${salesStats.avgTicket.toFixed(2)}</div>
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
                 <div className="text-gray-500 mb-1">Ticket Mínimo</div>
                 <div className="text-2xl font-bold">R${salesStats.minTicket.toFixed(2)}</div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
                 <div className="text-gray-500 mb-1">Ticket Máximo</div>
                 <div className="text-2xl font-bold">R${salesStats.maxTicket.toFixed(2)}</div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
                 <div className="text-gray-500 mb-1">Margem Média</div>
                 <div className="text-2xl font-bold">{((salesStats.netRevenue / salesStats.grossRevenue) * 100).toFixed(0)}%</div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-              <div className="p-6 border-b border-gray-200">
+            <div className="bg-white rounded-2xl shadow-card-premium border border-pink-claro/10 overflow-hidden">
+              <div className="p-6 border-b border-pink-claro/10">
                 <h3 className="text-xl font-bold">Estoque Crítico</h3>
               </div>
               <div className="p-6">
                 <table className="w-full">
                   <thead>
-                    <tr className="text-left text-gray-600 border-b border-gray-100">
+                    <tr className="text-left text-gray-600 border-b border-pink-claro/10">
                       <th className="pb-4 font-semibold">Produto</th>
                       <th className="pb-4 font-semibold">Estoque Atual</th>
                       <th className="pb-4 font-semibold">Estoque Mínimo</th>
                       <th className="pb-4 font-semibold">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-pink-claro/10">
                     {products.filter(p => p.status !== 'available').map(product => (
                       <tr key={product.id}>
                         <td className="py-4 font-medium">{product.name}</td>
@@ -187,15 +191,15 @@ export default function AdminPage() {
           <div>
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold">Produtos</h2>
-              <button className="bg-pink text-white px-6 py-3 rounded-full font-semibold hover:bg-black transition-all flex items-center gap-2">
+              <button className="bg-pink-principal text-white px-6 py-3 rounded-full font-semibold hover:bg-black-premium transition-all shadow-pink-glow flex items-center gap-2">
                 <Plus size={20} />
                 Novo Produto
               </button>
             </div>
             
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-card-premium border border-pink-claro/10 overflow-hidden">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-pink-claro/5">
                   <tr className="text-left text-gray-600">
                     <th className="px-6 py-4 font-semibold">Produto</th>
                     <th className="px-6 py-4 font-semibold">Preço de Compra</th>
@@ -207,16 +211,16 @@ export default function AdminPage() {
                     <th className="px-6 py-4 font-semibold">Ações</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-pink-claro/10">
                   {products.map(product => (
-                    <tr key={product.id} className="hover:bg-gray-50">
+                    <tr key={product.id} className="hover:bg-pink-claro/5 transition-colors">
                       <td className="px-6 py-4">
                         <div className="font-medium">{product.name}</div>
                         <div className="text-sm text-gray-500">{product.category}</div>
                       </td>
                       <td className="px-6 py-4">R${product.purchasePrice.toFixed(2)}</td>
                       <td className="px-6 py-4">R${product.minSalePrice.toFixed(2)}</td>
-                      <td className="px-6 py-4 text-pink font-bold">R${product.currentPrice.toFixed(2)}</td>
+                      <td className="px-6 py-4 text-pink-principal font-bold">R${product.currentPrice.toFixed(2)}</td>
                       <td className="px-6 py-4 font-medium">{product.stock}</td>
                       <td className="px-6 py-4">{product.minStock}</td>
                       <td className="px-6 py-4">
@@ -226,10 +230,10 @@ export default function AdminPage() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex gap-2">
-                          <button className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg">
+                          <button className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors">
                             <Edit2 size={18} />
                           </button>
-                          <button className="p-2 text-red-500 hover:bg-red-50 rounded-lg">
+                          <button className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
                             <Trash2 size={18} />
                           </button>
                         </div>
@@ -246,7 +250,7 @@ export default function AdminPage() {
           <div>
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold">Categorias</h2>
-              <button className="bg-pink text-white px-6 py-3 rounded-full font-semibold hover:bg-black transition-all flex items-center gap-2">
+              <button className="bg-pink-principal text-white px-6 py-3 rounded-full font-semibold hover:bg-black-premium transition-all shadow-pink-glow flex items-center gap-2">
                 <Plus size={20} />
                 Nova Categoria
               </button>
@@ -254,14 +258,14 @@ export default function AdminPage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories.map(category => (
-                <div key={category.id} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <div key={category.id} className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10">
                   <h3 className="text-xl font-bold mb-2">{category.name}</h3>
                   <div className="flex gap-2">
-                    <button className="flex-1 py-2 border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 flex items-center justify-center gap-2">
+                    <button className="flex-1 py-2 border-2 border-pink-principal rounded-xl text-pink-principal font-semibold hover:bg-pink-principal hover:text-white transition-all flex items-center justify-center gap-2">
                       <Edit2 size={16} />
                       Editar
                     </button>
-                    <button className="p-2 text-red-500 hover:bg-red-50 rounded-lg">
+                    <button className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
                       <Trash2 size={18} />
                     </button>
                   </div>
@@ -275,8 +279,8 @@ export default function AdminPage() {
           <div>
             <h2 className="text-2xl font-bold mb-8">Histórico de Vendas</h2>
             
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-              <div className="p-6 border-b border-gray-200">
+            <div className="bg-white rounded-2xl shadow-card-premium border border-pink-claro/10">
+              <div className="p-6 border-b border-pink-claro/10">
                 <h3 className="text-xl font-bold mb-4">Resumo do Mês</h3>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <div>

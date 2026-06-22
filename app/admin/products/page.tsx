@@ -110,17 +110,21 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+      <header className="bg-white shadow-sm border-b border-pink-claro/30 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-4">
-              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink">
+              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink-principal transition-colors">
                 <Home size={20} />
                 Voltar ao site
               </Link>
-              <h1 className="text-2xl font-bold">
-                Valen<span className="text-pink">Print</span> Admin
-              </h1>
+              <Link href="/">
+                <img
+                  src="/ValenPrintHosizontalImg.png"
+                  alt="ValenPrint"
+                  className="h-10 md:h-12 w-auto object-contain"
+                />
+              </Link>
             </div>
           </div>
         </div>
@@ -129,11 +133,11 @@ export default function ProductsPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">Produtos</h2>
-          <Link href="/admin" className="text-pink hover:underline">
+          <Link href="/admin" className="text-pink-principal hover:text-pink-medio font-semibold transition-colors">
             Voltar ao Dashboard
           </Link>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
+        <div className="bg-white p-6 rounded-2xl shadow-card-premium border border-pink-claro/10 mb-6">
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-semibold mb-2">Nome</label>
@@ -141,7 +145,7 @@ export default function ProductsPage() {
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 placeholder="Nome do produto"
                 required
               />
@@ -151,7 +155,7 @@ export default function ProductsPage() {
               <select
                 value={formData.categoryId}
                 onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 required
               >
                 <option value="">Selecione uma categoria</option>
@@ -169,7 +173,7 @@ export default function ProductsPage() {
                 step="0.01"
                 value={formData.price}
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 placeholder="29.90"
                 required
               />
@@ -180,7 +184,7 @@ export default function ProductsPage() {
                 type="number"
                 value={formData.stock}
                 onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 placeholder="100"
                 required
               />
@@ -191,7 +195,7 @@ export default function ProductsPage() {
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={3}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 placeholder="Descrição do produto"
                 required
               />
@@ -202,7 +206,7 @@ export default function ProductsPage() {
                 type="url"
                 value={formData.imageUrl}
                 onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                className="w-full px-4 py-3 rounded-xl border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                 placeholder="https://exemplo.com/imagem.jpg"
                 required
               />
@@ -213,7 +217,7 @@ export default function ProductsPage() {
                 id="featured"
                 checked={formData.isFeatured}
                 onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
-                className="w-4 h-4"
+                className="w-4 h-4 accent-pink-principal"
               />
               <label htmlFor="featured" className="text-sm font-semibold">
                 Produto em Destaque
@@ -222,7 +226,7 @@ export default function ProductsPage() {
             <div className="md:col-span-2">
               <button
                 type="submit"
-                className="bg-pink text-white px-6 py-3 rounded-full font-semibold hover:bg-black transition-all flex items-center gap-2"
+                className="bg-pink-principal text-white px-6 py-3 rounded-full font-semibold hover:bg-black-premium transition-all shadow-pink-glow flex items-center gap-2"
               >
                 <Plus size={18} />
                 Adicionar Produto
@@ -234,7 +238,7 @@ export default function ProductsPage() {
           {products.map((prod) => (
             <div
               key={prod.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+              className="bg-white rounded-2xl shadow-card-premium border border-pink-claro/10 overflow-hidden"
             >
               <img
                 src={prod.imageUrl}
@@ -242,7 +246,7 @@ export default function ProductsPage() {
                 className="w-full h-48 object-cover"
               />
               <div className="p-4">
-                <p className="text-xs text-pink font-semibold mb-1">
+                <p className="text-xs text-pink-principal font-semibold mb-1">
                   {prod.category.name}
                 </p>
                 <h3 className="text-lg font-bold mb-2">{prod.name}</h3>
@@ -250,8 +254,8 @@ export default function ProductsPage() {
                   {prod.description}
                 </p>
                 <div className="flex justify-between items-center">
-                  <p className="text-xl font-bold">R${prod.price.toFixed(2)}</p>
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                  <p className="text-xl font-bold text-pink-principal">R${prod.price.toFixed(2)}</p>
+                  <span className="text-xs bg-pink-claro/20 text-pink-principal px-2 py-1 rounded-full font-semibold">
                     Estoque: {prod.stock}
                   </span>
                 </div>

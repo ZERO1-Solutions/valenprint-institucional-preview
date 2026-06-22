@@ -39,16 +39,16 @@ export default function InventoryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+      <header className="bg-white shadow-sm border-b border-pink-claro/30 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-4">
-              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink">
+              <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-pink-principal transition-colors">
                 <Home size={20} />
                 Voltar ao site
               </Link>
               <h1 className="text-2xl font-bold">
-                Valen<span className="text-pink">Print</span> Admin
+                Valen<span className="text-pink-principal">Print</span> Admin
               </h1>
             </div>
           </div>
@@ -58,13 +58,13 @@ export default function InventoryPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">Gerenciar Estoque</h2>
-          <Link href="/admin" className="text-pink hover:underline">
+          <Link href="/admin" className="text-pink-principal hover:text-pink-medio font-semibold transition-colors">
             Voltar ao Dashboard
           </Link>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-card-premium border border-pink-claro/10 overflow-hidden">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-pink-claro/5">
               <tr>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
                   Produto
@@ -80,9 +80,9 @@ export default function InventoryPage() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-pink-claro/10">
               {products.map((prod) => (
-                <tr key={prod.id} className="hover:bg-gray-50">
+                <tr key={prod.id} className="hover:bg-pink-claro/5 transition-colors">
                   <td className="px-6 py-4">
                     <p className="font-semibold">{prod.name}</p>
                   </td>
@@ -95,7 +95,7 @@ export default function InventoryPage() {
                         const newStock = parseInt(e.target.value) || 0
                         updateStock(prod.id, newStock)
                       }}
-                      className="w-24 px-3 py-2 rounded-lg border border-gray-200 focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
+                      className="w-24 px-3 py-2 rounded-lg border border-pink-claro/30 focus:border-pink-principal focus:outline-none focus:ring-2 focus:ring-pink-principal/20 transition-all"
                     />
                   </td>
                   <td className="px-6 py-4">
