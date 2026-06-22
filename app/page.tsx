@@ -22,7 +22,9 @@ import {
   Menu,
   X,
   Check,
-  Tag
+  Tag,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react'
 
 const productCategories = [
@@ -267,9 +269,9 @@ const companies = [
 
 const ButtonPrimary = ({ children, className = '', ...props }: any) => (
   <motion.button
-    whileHover={{ scale: 1.03, y: -2 }}
-    whileTap={{ scale: 0.98 }}
-    className={`px-8 py-4 rounded-full bg-pink-principal text-white font-medium text-sm transition-all duration-300 shadow-pink-glow hover:shadow-lg flex items-center justify-center gap-2 ${className}`}
+    whileHover={{ scale: 1.05, y: -3 }}
+    whileTap={{ scale: 0.97 }}
+    className={`px-8 py-4 rounded-full bg-pink text-white font-semibold text-sm transition-all duration-300 shadow-pink-glow hover:bg-black-premium flex items-center justify-center gap-2 ${className}`}
     {...props}
   >
     {children}
@@ -278,9 +280,9 @@ const ButtonPrimary = ({ children, className = '', ...props }: any) => (
 
 const ButtonSecondary = ({ children, className = '', ...props }: any) => (
   <motion.button
-    whileHover={{ scale: 1.03, y: -2 }}
-    whileTap={{ scale: 0.98 }}
-    className={`px-8 py-4 rounded-full bg-white border-2 border-pink-principal text-pink-principal font-medium text-sm transition-all duration-300 hover:bg-pink-principal hover:text-white flex items-center justify-center gap-2 ${className}`}
+    whileHover={{ scale: 1.05, y: -3 }}
+    whileTap={{ scale: 0.97 }}
+    className={`px-8 py-4 rounded-full bg-black-premium text-white border-2 border-black-premium font-semibold text-sm transition-all duration-300 hover:bg-pink hover:border-pink flex items-center justify-center gap-2 ${className}`}
     {...props}
   >
     {children}
@@ -300,6 +302,140 @@ const WhatsAppButton = () => (
     <span className="hidden sm:inline font-semibold">WhatsApp</span>
   </motion.a>
 )
+
+const ProductCarousel = ({ products, catIndex }: { products: any[], catIndex: number }) => {
+  const carouselRef = useState<HTMLDivElement>(null)[0];
+  
+  const scroll = (direction: 'left' | 'right') => {
+    if (carouselRef) {
+      const scrollAmount = carouselRef.clientWidth * 0.8;
+      carouselRef.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  return (
+    <div className="relative group">
+      {/* Left Arrow - Desktop only */}
+      <button
+        onClick={() => scroll('left')}
+        className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-pink-claro/50 rounded-full p-3 shadow-lg hover:bg-pink hover:text-white hover:border-pink transition-all duration-300 text-pink"
+        aria-label="Anterior"
+      >
+        <ChevronLeft size={24} />
+      </button>
+
+      {/* Carousel Container */}
+      <div
+        ref={carouselRef}
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {products.map((product, prodIndex) => (
+          <motion.div
+            key={product.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: (catIndex * 0.1) + (prodIndex * 0.05) }}
+            whileHover={{ y: -8 }}
+            className="snap-start flex-shrink-0 w-[90%] sm:w-[48%] md:w-[32%] lg:w-[24%] xl:w-[20%] bg-white rounded-3xl overflow-hidden shadow-card-premium group/product border border-pink-claro/20"
+          >
+            <div className="relative h-64 sm:h-72 overflow-hidden">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover group-hover/product:scale-105 transition-transform duration-700"
+              />
+              {'isBestSeller' in product && product.isBestSeller && (
+                <div className="absolute top-4 left-4 bg-pink text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                  Mais Vendido
+                </div>
+              )}
+              {'isPremium' in product && product.isPremium && (
+                <div className="absolute top-4 left-4 bg-black-premium text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                  Premium
+                </div>
+              )}
+              <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full p-2 text-pink">
+                <Heart size={20} />
+              </div>
+            </div>
+
+            <div className="p-5">
+              <div className="flex flex-wrap gap-2 mb-3">
+                <span className="inline-flex items-center gap-1 text-xs bg-pink-support text-pink px-2 py-1 rounded-full">
+                  <Tag size={12} />
+                  Personalizável
+                </span>
+              </div>
+
+              <h4 className="text-lg font-bold mb-2 group-hover/product:text-pink transition-colors line-clamp-1">
+                {product.name}
+              </h4>
+
+              <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                {product.description}
+              </p>
+
+              {(() => {
+                const items: string[] | undefined = 
+                  ('features' in product ? product.features : undefined) ?? 
+                  ('includes' in product ? product.includes : undefined);
+                return items ? (
+                  <ul className="mb-4 space-y-1">
+                    {items.slice(0, 3).map((item, i) => (
+                      <li key={i} className="text-xs text-gray-500 flex items-center gap-1">
+                        <Check size={12} className="text-pink flex-shrink-0" />
+                        <span className="line-clamp-1">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null;
+              })()}
+
+              <div className="mb-4 pt-3 border-t border-pink-claro/20">
+                <div className="flex items-end gap-2">
+                  <span className="text-2xl font-bold text-pink">{product.price}</span>
+                  {'wholesalePrice' in product && product.wholesalePrice && (
+                    <span className="text-sm text-gray-500 line-through mb-1">
+                      {product.wholesalePrice}
+                    </span>
+                  )}
+                </div>
+                {'wholesalePrice' in product && product.wholesalePrice && (
+                  <p className="text-xs text-green-600 mt-1 font-medium">
+                    Atacado: {product.wholesalePrice}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <ButtonPrimary className="w-full text-sm py-2.5">
+                  Solicitar Orçamento <MessageCircle size={14} />
+                </ButtonPrimary>
+                <ButtonSecondary className="w-full text-sm py-2.5">
+                  Personalizar Agora
+                </ButtonSecondary>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Right Arrow - Desktop only */}
+      <button
+        onClick={() => scroll('right')}
+        className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10 bg-white border-2 border-pink-claro/50 rounded-full p-3 shadow-lg hover:bg-pink hover:text-white hover:border-pink transition-all duration-300 text-pink"
+        aria-label="Próximo"
+      >
+        <ChevronRight size={24} />
+      </button>
+    </div>
+  );
+};
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -334,12 +470,12 @@ export default function Home() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-gray-600 hover:text-pink-principal transition-colors font-medium text-sm"
+                  className="text-gray-600 hover:text-pink transition-colors font-medium text-sm"
                 >
                   {link.label}
                 </a>
               ))}
-              <Link href="/admin" className="text-pink-principal hover:text-pink-medio font-semibold transition-colors">
+              <Link href="/admin" className="text-pink hover:text-pink-medio font-semibold transition-colors">
                 Admin
               </Link>
               <ButtonPrimary>
@@ -368,7 +504,7 @@ export default function Home() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block py-2 text-gray-600 hover:text-pink-principal transition-colors text-sm font-medium"
+                  className="block py-2 text-gray-600 hover:text-pink transition-colors text-sm font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -376,7 +512,7 @@ export default function Home() {
               ))}
               <Link
                 href="/admin"
-                className="block py-2 text-pink-principal font-semibold hover:text-pink-medio transition-colors text-sm"
+                className="block py-2 text-pink font-semibold hover:text-pink-medio transition-colors text-sm"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Admin
@@ -392,14 +528,8 @@ export default function Home() {
       {/* Hero Section */}
       <section id="home" className="pt-32 pb-24 px-6 bg-black-premium relative overflow-hidden">
         {/* Decorative Elements */}
-        <div className="absolute top-20 left-10 text-pink-claro opacity-20 sparkle">
-          <Sparkles size={60} />
-        </div>
         <div className="absolute top-40 right-20 text-pink-principal opacity-30 heart-pulse">
           <Heart size={80} fill="currentColor" />
-        </div>
-        <div className="absolute bottom-20 left-1/4 text-pink-claro opacity-25 float">
-          <Sparkles size={40} />
         </div>
 
         <div className="max-w-7xl mx-auto">
@@ -432,7 +562,7 @@ export default function Home() {
                 <ButtonPrimary>
                   Solicitar Orçamento <ArrowRight size={20} />
                 </ButtonPrimary>
-                <ButtonSecondary className="border-pink-claro text-pink-claro hover:bg-pink-claro hover:text-black-premium">
+                <ButtonSecondary className="border-white text-white bg-transparent hover:bg-white hover:text-black-premium">
                   Ver Catálogo
                 </ButtonSecondary>
               </div>
@@ -461,7 +591,7 @@ export default function Home() {
       <section id="catalogo" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <span className="font-decorative text-3xl text-pink-principal">Nosso Catálogo</span>
+            <span className="font-decorative text-3xl text-pink">Nosso Catálogo</span>
             <h2 className="text-4xl md:text-5xl font-bold mt-2">Produtos Personalizados</h2>
           </div>
 
@@ -469,104 +599,13 @@ export default function Home() {
           {productCategories.map((category, catIndex) => (
             <div key={category.id} className="mb-20">
               <div className="flex items-center gap-4 mb-10 pb-4 border-b border-pink-claro/30">
-                <div className="w-12 h-12 bg-pink-principal rounded-full flex items-center justify-center text-white shadow-pink-glow">
+                <div className="w-12 h-12 bg-pink rounded-full flex items-center justify-center text-white shadow-pink-glow">
                   {category.icon}
                 </div>
                 <h3 className="text-2xl md:text-3xl font-serif font-semibold">{category.name}</h3>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {category.products.map((product, prodIndex) => (
-                  <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: (catIndex * 0.1) + (prodIndex * 0.05) }}
-                    whileHover={{ y: -12 }}
-                    className="bg-white rounded-3xl overflow-hidden shadow-card-premium group border border-pink-claro/20"
-                  >
-                    <div className="relative h-72 overflow-hidden">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      {'isBestSeller' in product && product.isBestSeller && (
-                        <div className="absolute top-4 left-4 bg-pink-principal text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
-                          Mais Vendido
-                        </div>
-                      )}
-                      {'isPremium' in product && product.isPremium && (
-                        <div className="absolute top-4 left-4 bg-black-premium text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
-                          Premium
-                        </div>
-                      )}
-                      <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full p-2 text-pink-principal">
-                        <Heart size={20} />
-                      </div>
-                    </div>
-
-                    <div className="p-6">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        <span className="inline-flex items-center gap-1 text-xs bg-pink-support text-pink-principal px-2 py-1 rounded-full">
-                          <Tag size={12} />
-                          Personalizável
-                        </span>
-                      </div>
-
-                      <h4 className="text-lg font-bold mb-3 group-hover:text-pink-principal transition-colors">
-                        {product.name}
-                      </h4>
-
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                        {product.description}
-                      </p>
-
-                      {(() => {
-                        const items: string[] | undefined = 
-                          ('features' in product ? product.features : undefined) ?? 
-                          ('includes' in product ? product.includes : undefined);
-                        return items ? (
-                          <ul className="mb-4 space-y-1">
-                            {items.map((item, i) => (
-                            <li key={i} className="text-xs text-gray-500 flex items-center gap-1">
-                              <Check size={12} className="text-pink-principal flex-shrink-0" />
-                              {item}
-                            </li>
-                          ))}
-                          </ul>
-                        ) : null;
-                      })()}
-
-                      <div className="mb-5 pt-4 border-t border-pink-claro/20">
-                        <div className="flex items-end gap-2">
-                          <span className="text-2xl font-bold text-pink-principal">{product.price}</span>
-                          {'wholesalePrice' in product && product.wholesalePrice && (
-                            <span className="text-sm text-gray-500 line-through mb-1">
-                              {product.wholesalePrice}
-                            </span>
-                          )}
-                        </div>
-                        {'wholesalePrice' in product && product.wholesalePrice && (
-                          <p className="text-xs text-green-600 mt-1 font-medium">
-                            Atacado: {product.wholesalePrice} (a partir de 10 unidades)
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="flex flex-col gap-3">
-                        <ButtonPrimary className="w-full text-sm py-3">
-                          Solicitar Orçamento <MessageCircle size={16} />
-                        </ButtonPrimary>
-                        <ButtonSecondary className="w-full text-sm py-3">
-                          Personalizar Agora
-                        </ButtonSecondary>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              <ProductCarousel products={category.products} catIndex={catIndex} />
             </div>
           ))}
         </div>

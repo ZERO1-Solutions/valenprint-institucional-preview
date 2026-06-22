@@ -45,4 +45,13 @@ body {
   .glow-pink {
     box-shadow: 0 0 40px rgba(255, 92, 147, 0.25);
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
