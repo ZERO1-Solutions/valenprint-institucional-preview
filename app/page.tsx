@@ -492,12 +492,12 @@ export default function Home() {
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
-                      {product.isBestSeller && (
+                      {'isBestSeller' in product && product.isBestSeller && (
                         <div className="absolute top-4 left-4 bg-pink-principal text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
                           Mais Vendido
                         </div>
                       )}
-                      {product.isPremium && (
+                      {'isPremium' in product && product.isPremium && (
                         <div className="absolute top-4 left-4 bg-black-premium text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
                           Premium
                         </div>
